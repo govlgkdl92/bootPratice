@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EX1</title>
+</head>
+<body>
+${list}
+
+<div th:with="max = ${100}">
+    <h3>
+        <a th:href="@{/view(keyword=${list}, name='강동원', limit=${max} )}">링크 테스트</a>
+    </h3>
+</div>
+
+
+
+<!--/*
+ 그냥 약어로 하면 주석 안먹힘 /* 해야함
+
+ 태그를 만들어 출력해야지만 제대로 보인다.
+ 태그 없이 ${msg}로 출력하면 그 글자 그대로 나옴
+
+ 만약 제대로 보고 싶으면 [[ ]] 안에 써주면 됨
+
+ 내용물을 바꾸고 싶을 때는 th 태그를 사용하지만 그냥 출력할 때는 [[ ]] 로 사용한다. */-->
+
+<h6>[[${list}]]</h6>
+<h3 th:text="${list22}">no result</h3>
+<h3 th:text="${list}">no result</h3>
+
+<div th:with="num1 = ${10}, num2= ${20}">
+    <h1>[[${num1 + num2}]]</h1>
+</div>
+
+<!--/* div 안에서만 사용할 수 있는 변수 선언 */-->
+
+<ul>
+    <li th:each="str: ${list}">[[${str}]]</li> <!--/* 카운트는 1부터 시작 */-->
+    <li th:each="str,status: ${list}">[[${status.count}]]...... [[${str}]]</li>
+</ul>
+<!--/* str 은 변수명!   */-->
+<ul>                <!--/* status 를 바깥에 선언하면 더 편하지 않을까? */-->
+    <th:block th:each="animal, status: ${pet}">
+        <li th:text="${status.count +' : '+ animal}"></li>
+    </th:block>
+</ul>
+
+<ul>
+<li th:each="str, status: ${list}">
+    <span th:text="${status.odd} ? 'ODD ----'+${str}"></span>
+</li>           <!--/* odd -> 홀수만 보여주고 싶은데? */-->
+
+<!--/* 엘비스 연산자 - ?를 이용해서 값만 보여주는 연산자 */-->
+
+<li th:each="str, status: ${list}">
+    <span th:text="${status.even} ? 'EVEN ----'+${str}"></span>
+</li>            <!--/* even -> 짝수만 보여주고 싶은데? */-->
+</ul>
+
+
+<ul>
+    <th:block th:each="animal, status: ${pet}">
+        <li th:text="${status.odd} ? 'ODD : '+${animal}"></li>
+    </th:block>
+</ul>
+<!--/* 엘비스 연산자는 밖으로 빼고
+        삼항 연산자는 안쪽, 바깥쪽 다 된다. */-->
+
+
+<!--/* 스위치 */-->
+<ul>
+    <li th:each="str, status : ${list}">
+        <th:block th:switch="${status.index % 3}">
+            <span th:case="0">0</span>
+            <span th:case="1">1</span>
+            <span th:case="2">2</span>
+        </th:block>
+    </li>
+</ul>
+
+
+<!--/* 인라인 기능 - 좋아! */-->
+
+<h3>ex1</h3>
+
+</body>
+</html>

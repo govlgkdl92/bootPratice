@@ -1,0 +1,82 @@
+// 1번 추가
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'org.zerock'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'//
+    implementation 'org.springframework.boot:spring-boot-starter-web'//
+    compileOnly 'org.projectlombok:lombok' //
+    developmentOnly 'org.springframework.boot:spring-boot-devtools' //
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'//
+    annotationProcessor 'org.projectlombok:lombok' //
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    testCompileOnly 'org.projectlombok:lombok' // test 사용하려면 추가해야 한다.
+    testAnnotationProcessor 'org.projectlombok:lombok' //
+
+    // 타임리프 https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' //버전정보 지우기
+
+    // 레이아웃 다이렉트 https://mvnrepository.com/artifact/nz.net.ultraq.thymeleaf/thymeleaf-layout-dialect
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
+
+    
+    //2번 추가
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    annotationProcessor(
+            "javax.persistence:javax.persistence-api",
+            "javax.annotation:javax.annotation-api",
+            "com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
+
+
+    //모델 메퍼
+    implementation 'org.modelmapper:modelmapper:3.1.0'
+
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+
+    implementation 'net.coobird:thumbnailator:0.4.16'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+//3번 추가
+sourceSets {
+    main {
+        java {
+            srcDirs = ["$projectDir/src/main/java", "$projectDir/build/generated"]
+        }
+    }
+}
+
+// 우리는 2.6.7 을 사용하는데 2.5버전 밑의 환경설정은 정상 동작을 하지 않는 경우가 많다. 참고

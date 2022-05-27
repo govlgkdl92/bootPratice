@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EX2</title>
+</head>
+<body>
+<!--/* 키 출력 스타일이 다름. map 이랑 list 에 따라서.. */-->
+
+<!--/* list */-->
+<div>[[${list}]]</div>
+&nbsp;
+
+<!--/* map */-->
+<div>[[${result}]]</div>
+
+<!--/* */-->
+<script th:inline="javascript">
+    const arr = [[${list}]]
+    const result = [[${result}]]
+    const temp = [[${temp}]]
+    /* 출력 값이 없으면 자동으로 null 로 만들어줌 */
+
+    console.log(arr)
+    console.log(result)
+    console.log(temp)
+
+    /* 오늘의 하이라이트 레이아웃 기능! */
+    /* 네임스페이스가 조금 다름
+       layout:fragment="content" 사용
+    */
+</script>
+
+</body>
+</html>

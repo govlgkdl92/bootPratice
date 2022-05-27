@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>LAYOUT</title>
+</head>
+<body>
+    <div>
+        <h3>Header</h3>
+    </div>
+
+    <div layout:fragment="content" style="background-color: blanchedalmond">
+        <h3>Content 부분</h3>
+    </div>
+
+    <div>
+        <h4>footer</h4>
+    </div>
+
+    <th:block layout:fragment="script">
+
+    </th:block>
+</body>

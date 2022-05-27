@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ex3.html</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <h3>Ex3 ---------------- Ex3</h3>
+    </div>
+
+    <script layout:fragment="script" th:inline="javascript">
+        const list = [[${list}]]
+    </script>
+
+</body>
+</html>
